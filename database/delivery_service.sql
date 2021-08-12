@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Май 20 2021 г., 15:42
+-- Время создания: Июн 22 2021 г., 12:13
 -- Версия сервера: 8.0.19
 -- Версия PHP: 8.0.1
 
@@ -58,10 +58,17 @@ CREATE TABLE `client` (
 --
 
 INSERT INTO `client` (`id`, `name`, `password`, `email`) VALUES
-(24, 'Ростислав Баранец', '1234567890', 'baranets.01@gmail'),
-(25, 'qweqweqwe', 'qwe', 'qwe'),
-(27, 'фцвфыфыв', 'фыафыафыа', 'фыафыафыа'),
-(29, 'Ростислав', '12345', 'baranets.01@gmail.com');
+(24, 'Ростислав Баранец', '123456789', 'baranets.01@gmail.com'),
+(35, 'Королёв Мирослав', 'sJ9Mjy3P44', 'yoprequeufeibre-5848@mail.com'),
+(36, 'Гриневская Цезарь', '38SYU2b5kt', 'beugetrigimo-4597@gmail.com'),
+(37, 'Баранов Всеволод', '92X4zpR2eR', 'nuboiffummeulle-9998@yopmail.com'),
+(40, 'Федосеев Зигмунд', 'iLX67u4K5i', 'wegredannipreu@yopmail.com'),
+(41, 'Потапов Йонас', 'ef2D6d63HG', 'fettoixautappi-5625@yopmail.com'),
+(42, 'Медведев Филипп', 'ef2D6d63HG', 'gittebripreisu-9564@gmail.com'),
+(43, 'Быкова Раиса', 'm3Cm5TS2y5', 'fribrettukebroi@gmail.com'),
+(44, 'Агафонова Эллада', 'Bi7Me944fL', 'frutemmeinneufe@gmail.com'),
+(46, 'Яворивска Валентина', 'ZRTs76a96m', 'preijacratau@gmail.com'),
+(47, 'Максимова Устинья', 'E2ij5a3ML7', 'yoiyuceillitau@yopmail.com');
 
 -- --------------------------------------------------------
 
@@ -81,17 +88,25 @@ CREATE TABLE `delivery` (
   `id_view` int DEFAULT NULL,
   `id_price` int DEFAULT NULL,
   `cost` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Дамп данных таблицы `delivery`
 --
 
 INSERT INTO `delivery` (`id`, `id_client`, `address1`, `address2`, `date`, `distance`, `weight`, `id_type`, `id_view`, `id_price`, `cost`) VALUES
-(31, 25, ' hb', '№1 Днепр йцувйцв', '2021-05-12', 10, 10, 3, 2, 4, 140),
-(33, 25, '№1 Днепр йцувйцв', '№3 Днепр фавфывапыаукрвкрв', '2021-05-13', 123, 900, 1, 3, 9, 3740),
-(34, 24, 'qwqe', 'qwewq', '2020-05-14', 10, 10, 1, 4, 10, 200),
-(36, 25, '№2 Днепр фывфывфыв', '1ee12e', '2021-05-16', 10, 31, 2, 3, 8, 260);
+(41, 24, '№457 Киев Заболотного Академика, 21', '№2 Днепр Стеценко, 57', '2021-06-15', 307, 3, 1, 1, 1, 1892),
+(42, 24, '№2 Днепр Стеценко, 57', 'Тернополь Володимира Великого, 3', '2021-06-15', 523, 30, 2, 1, 2, 8951),
+(43, 24, '№2 Днепр Стеценко, 57', '№464 Львов Вигоди, 58', '2021-06-15', 430, 13, 1, 4, 10, 6500),
+(44, 35, 'Киев Горловская, 200', 'Харьков пр. Победы, дом 60, кв. 82', '2021-06-15', 250, 10, 4, 2, 4, 2070),
+(45, 35, '№457 Киев Заболотного Академика, 21', '№461 Луганск Шевченко, 3', '2021-06-15', 411, 5, 1, 1, 1, 2516),
+(46, 36, '№2 Днепр Стеценко, 57', '№459 Одесса Кордонная, 90', '2021-06-15', 340, 2, 1, 1, 1, 2090),
+(47, 37, '№2 Днепр Стеценко, 57', '№461 Луганск Шевченко, 3', '2021-06-15', 350, 11, 1, 1, 1, 2150),
+(48, 40, '№464 Львов Вигоди, 58', '№461 Луганск Шевченко, 3', '2021-06-15', 700, 270, 1, 4, 12, 24550),
+(49, 43, 'Киев Мануильского, 21, кв. 19', '№460 Сумы Продольна, 46', '2021-06-15', 278, 32, 3, 1, 2, 4791),
+(50, 44, '№2 Днепр Стеценко, 57', '№463 Кривой Рог Корнейчука, 17', '2021-06-15', 10, 57, 1, 3, 8, 250),
+(51, 46, 'Киев Горловская, 247', 'Киев Мануильского, 77, кв. 2', '2021-06-15', 7, 2, 4, 3, 7, 140),
+(52, 47, '№457 Киев Заболотного Академика, 21', '№459 Одесса Кордонная, 90', '2021-06-15', 213, 423, 1, 1, 3, 4310);
 
 -- --------------------------------------------------------
 
@@ -110,13 +125,16 @@ CREATE TABLE `department` (
 --
 
 INSERT INTO `department` (`id`, `city`, `address`) VALUES
-(1, 'Днепрп', 'чити'),
-(2, 'Днепр', 'фывфывфыв'),
-(4, 'аыва', 'вфыа'),
-(47, 'Киев', 'мотрна'),
-(123, 'вфавыаф', 'афвава'),
-(124, 'qwdwq', 'dwqd'),
-(454, 'фпафап', 'фпаап');
+(2, 'Днепр', 'Стеценко, 57'),
+(456, 'Днепр', 'Пастера 4а'),
+(457, 'Киев', 'Заболотного Академика, 21'),
+(458, 'Киев', 'Княжий Затон, 14'),
+(459, 'Одесса', 'Кордонная, 90'),
+(460, 'Сумы', 'Продольна, 46'),
+(461, 'Луганск', 'Шевченко, 3'),
+(462, 'Львов', 'Спортивна, 2'),
+(463, 'Кривой Рог', 'Корнейчука, 17'),
+(464, 'Львов', 'Вигоди, 58');
 
 -- --------------------------------------------------------
 
@@ -127,8 +145,7 @@ INSERT INTO `department` (`id`, `city`, `address`) VALUES
 CREATE TABLE `price_of_view` (
   `id` int NOT NULL,
   `id_view` int NOT NULL,
-  `weight_min` float NOT NULL,
-  `weight_max` float NOT NULL,
+  `weight_id` int NOT NULL,
   `cost` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -136,19 +153,19 @@ CREATE TABLE `price_of_view` (
 -- Дамп данных таблицы `price_of_view`
 --
 
-INSERT INTO `price_of_view` (`id`, `id_view`, `weight_min`, `weight_max`, `cost`) VALUES
-(1, 1, 0, 20, 6),
-(2, 1, 20.01, 200, 17),
-(3, 1, 200.01, 1000, 20),
-(4, 2, 0, 20, 8),
-(5, 2, 20.01, 200, 14),
-(6, 2, 200.1, 1000, 25),
-(7, 3, 0, 20, 10),
-(8, 3, 20.01, 200, 20),
-(9, 3, 200.1, 1000, 30),
-(10, 4, 0, 20, 15),
-(11, 4, 20.01, 200, 25),
-(12, 4, 200.1, 1000, 35);
+INSERT INTO `price_of_view` (`id`, `id_view`, `weight_id`, `cost`) VALUES
+(1, 1, 1, 6),
+(2, 1, 2, 17),
+(3, 1, 3, 20),
+(4, 2, 1, 8),
+(5, 2, 2, 14),
+(6, 2, 3, 25),
+(7, 3, 1, 10),
+(8, 3, 2, 20),
+(9, 3, 3, 30),
+(10, 4, 1, 15),
+(11, 4, 2, 25),
+(12, 4, 3, 35);
 
 -- --------------------------------------------------------
 
@@ -189,10 +206,31 @@ CREATE TABLE `view_of_delivery` (
 --
 
 INSERT INTO `view_of_delivery` (`id`, `name`, `description`) VALUES
-(1, 'Стандарт', 'послуга передбачає виїзд за вантажем або доставку протягом операційного дня відповідного до маршруту руху транспорту служби'),
-(2, 'Вовремя', 'послуга передбачає виїзд за вантажем або доставку в точно зазначене, обумовлений час'),
-(3, 'Експрес', 'послуга передбачає виїзд за вантажем або доставку протягом однієї години з моменту оформлення замовлення '),
-(4, 'Ночной', 'послуга передбачає виїзд за вантажем або доставку з 19:00 до 9:00 згідно маршруту руху транспорту служби доставки.');
+(1, 'Стандарт', 'выезд за грузом или доставку в течение операционного дня соответствующего маршрута движения транспорта службы '),
+(2, 'Вовремя', 'выезд за грузом или доставку в точно указанное, оговоренное время '),
+(3, 'Експрес', 'выезд за грузом или доставку в течение одного часа с момента оформления заказа '),
+(4, 'Ночной', 'выезд за грузом или доставку с 19:00 до 9:00 по маршруту движения транспорта службы доставки. ');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `weight`
+--
+
+CREATE TABLE `weight` (
+  `id` int NOT NULL,
+  `min` float NOT NULL,
+  `max` float NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Дамп данных таблицы `weight`
+--
+
+INSERT INTO `weight` (`id`, `min`, `max`) VALUES
+(1, 1, 20),
+(2, 20.001, 200),
+(3, 200.001, 1000);
 
 --
 -- Индексы сохранённых таблиц
@@ -232,7 +270,8 @@ ALTER TABLE `department`
 --
 ALTER TABLE `price_of_view`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `id_view` (`id_view`);
+  ADD KEY `id_view` (`id_view`),
+  ADD KEY `weight_id` (`weight_id`);
 
 --
 -- Индексы таблицы `type_of_delivery`
@@ -244,6 +283,12 @@ ALTER TABLE `type_of_delivery`
 -- Индексы таблицы `view_of_delivery`
 --
 ALTER TABLE `view_of_delivery`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `weight`
+--
+ALTER TABLE `weight`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -260,25 +305,25 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT для таблицы `client`
 --
 ALTER TABLE `client`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- AUTO_INCREMENT для таблицы `delivery`
 --
 ALTER TABLE `delivery`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- AUTO_INCREMENT для таблицы `department`
 --
 ALTER TABLE `department`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=455;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=465;
 
 --
 -- AUTO_INCREMENT для таблицы `price_of_view`
 --
 ALTER TABLE `price_of_view`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT для таблицы `type_of_delivery`
@@ -290,7 +335,13 @@ ALTER TABLE `type_of_delivery`
 -- AUTO_INCREMENT для таблицы `view_of_delivery`
 --
 ALTER TABLE `view_of_delivery`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT для таблицы `weight`
+--
+ALTER TABLE `weight`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Ограничения внешнего ключа сохраненных таблиц
@@ -309,7 +360,8 @@ ALTER TABLE `delivery`
 -- Ограничения внешнего ключа таблицы `price_of_view`
 --
 ALTER TABLE `price_of_view`
-  ADD CONSTRAINT `price_of_view_ibfk_1` FOREIGN KEY (`id_view`) REFERENCES `view_of_delivery` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+  ADD CONSTRAINT `price_of_view_ibfk_1` FOREIGN KEY (`id_view`) REFERENCES `view_of_delivery` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  ADD CONSTRAINT `price_of_view_ibfk_2` FOREIGN KEY (`weight_id`) REFERENCES `weight` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
