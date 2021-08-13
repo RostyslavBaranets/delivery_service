@@ -1,20 +1,18 @@
 <?php
 session_start();
 require ('connect.php');
-
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
-    <title>Регистрация</title>
+    <title>Личный кабинет</title>
     <link rel="stylesheet" type="text/css" href="style\acount.css"> </head>
 
 <body>
     <header>
-        <a href="main.php"><img src="images\logovhod.jpg"></a>
+        <a href="index.php"><img src="images\logovhod.jpg"></a>
         <a class="a" href="exit.php">Выйти из акаунта</a>
     </header>
     <form class="block">
@@ -68,5 +66,4 @@ where d.id_client=".$_SESSION['id']." ";
             <br>+38 (XXX) XXX XX XX</span5>
     </footer>
 </body>
-
 </html>

@@ -3,11 +3,9 @@ require ('connect.php');
 if(isset($_POST['email']) and isset($_POST['password'])){
     $email=$_POST['email'];
     $password=$_POST['password'];
-
     $query = "SELECT * FROM client where email='$email' and password='$password'";
     $result = mysqli_query($connection, $query) or die(mysqli_error($connection));
     $row = mysqli_fetch_assoc($result);
-
     if(!empty($row)){
         session_start();
         $_SESSION['id'] = $row['id'];
@@ -15,9 +13,7 @@ if(isset($_POST['email']) and isset($_POST['password'])){
     }else{
         $err = "Ошибка входа";
     }
-
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -28,7 +24,7 @@ if(isset($_POST['email']) and isset($_POST['password'])){
 </head>
 <body>
     <header>
-        <a href="main.php"><img src="images\logovhod.jpg"></a>
+        <a href="index.php"><img src="images\logovhod.jpg"></a>
     </header>
 <form class="block" method="post">
     <div>Вход</div>

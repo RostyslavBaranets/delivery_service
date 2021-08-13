@@ -22,12 +22,12 @@ else{
 
     $sq="INSERT INTO client ( name, email, password) VALUES ('$name','$email','$password')";
     mysqli_query($connection,$sq);
-    $alrt = "Вы успешно зарегестрированны <br> <a href='vhod.php' style='padding: 85px;color: rgb(68, 68, 68);font-size: 20px;'>Войти</a> ";
+    $alrt = "Вы успешно зарегестрированны <br> <a href='index.php' style='padding: 85px;color: rgb(68, 68, 68);font-size: 20px;'>Войти</a> ";
 }
 }
 ?>
     <header>
-        <a href="main.php"><img src="images\logovhod.jpg"></a>
+        <a href="index.php"><img src="images\logovhod.jpg"></a>
     </header>
 <form class="block" method="post">
     <div class="regis">Регистрация</div>

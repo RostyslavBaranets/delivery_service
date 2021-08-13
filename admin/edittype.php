@@ -11,6 +11,21 @@ if($result) {
     }
     mysqli_free_result($result);
 }
+
+if (isset($_POST['button'])) {
+    if (isset($_POST['cost'])) {
+        $cost = $_POST['cost'];
+        $sq = "UPDATE type_of_delivery SET cost='$cost' WHERE id='$id' ";
+        $result = mysqli_query($connection, $sq);
+        if (mysqli_affected_rows($connection)>0){
+            $err= "Успешно сохраненно";
+        }
+        else{
+            $err="Ошибка";
+        }
+    }
+}
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -19,33 +34,26 @@ if($result) {
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Смена цены</title>
+    <link rel="stylesheet" type="text/css" href="/style/vhod.css">
 </head>
 <body>
-<form method="post">
-    Номер<br>
-    <input name="id" value="<?echo $id;?> " disabled><br>
-    Название<br>
-    <input name="name" value="<?echo $name;?>" disabled><br>
-    Цена<br>
-    <input name="cost" value="<?echo $cost;?>"><br><br>
-    <input type="submit" value="Сохранить" name="button"><br>
+<header>
+    <img src="\images\logovhod.jpg">
+    <a class="exit" href="amain.php">Назад</a>
+</header>
+<form class="block" method="post">
+    <div class="group">
+        <input type="text" name="cost" value="<?echo $cost;?>"> <span class="bar"></span>
+        <label>Стоимость</label>
+    </div>
+    <button name="button" type="submit">Сохранить</button>
+    <?php if(isset($err)) { ?><div role="alert" style="color: rgb(201, 35, 35);
+    position: relative;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%);font-size: 25px;"><?php echo $err;?> </div> <?php } ?>
 </form>
-<a href='amain.php'> назад</a>
-<?php
-if (isset($_POST['button'])){
-    if (isset($_POST['cost'])){
-        $cost=$_POST['cost'];
-        $sq="UPDATE type_of_delivery SET cost='$cost' WHERE id='$id' ";
-        $result=mysqli_query($connection,$sq);
-        if (mysqli_affected_rows($connection)>0){
-            echo "Успешно сохраненно<br>";
-        }
-        else{
-            echo "Ошибка<br>";
-        }
-    }
-}
-?>
+
 </body>
 </html>

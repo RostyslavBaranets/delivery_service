@@ -9,11 +9,17 @@ require ('connect.php');
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>Админпанель</title>
+    <link rel="stylesheet" type="text/css" href="../style/style.css">
 </head>
 <body>
-Клиенты:
+<header>
+    <img src="\images\logo.jpg">
+    <a class="exit" href='exit.php'>Выйти с админ панели</a>
+</header>
+<div class="qwe">
+<a href="#client">Все клиенты:</a>
+<div id="client">
 <table>
 <?php $sq="SELECT * FROM client ";
 $result=mysqli_query($connection,$sq);
@@ -25,15 +31,20 @@ if($result) {
         $row = mysqli_fetch_row($result);
         echo "<tr>";
         for ($j = 0 ; $j < 4 ; ++$j) echo "<td>$row[$j]</td>";
-        echo "<td><a href='editclient.php?id=".$row['0']."'> редактировать</a></td>
+        echo "<td><a href='deliveryclient.php?id=".$row['0']."'> просмотреть заказы</a></td>
+    <td><a href='editclient.php?id=".$row['0']."'> редактировать</a></td>
     <td><a href='deleteclient.php?id=".$row['0']."'> удалить</a></td></tr>";
     }
 }
 ?>
 </table>
-<a href='addclient.php'> Добавить клиента</a><br><br>
+<a href='addclient.php'> Добавить клиента</a>
+</div><br>
 
-Отделения:
+    <a href="search.php">Поиск по клиенту</a><br>
+
+<a href="#dep">Отделения:</a>
+<div id="dep">
 <table>
     <?php $sq="SELECT * FROM department ";
     $result=mysqli_query($connection,$sq);
@@ -51,9 +62,11 @@ if($result) {
     }
     ?>
 </table>
-<a href='adddep.php'> Добавить отделение</a><br><br>
+<a href='adddep.php'> Добавить отделение</a>
+</div><br>
 
-Тип доставки:
+<a href="#type">Тип доставки:</a>
+<div id="type">
 <table>
     <?php $sq="SELECT * FROM type_of_delivery";
     $result=mysqli_query($connection,$sq);
@@ -69,9 +82,11 @@ if($result) {
         }
     }
     ?>
-</table><br><br>
+</table>
+</div><br>
 
-Вид доставки:
+<a href="#view">Вид доставки:</a>
+<div id="view">
 <table>
     <?php $sq="SELECT * FROM view_of_delivery ";
     $result=mysqli_query($connection,$sq);
@@ -83,33 +98,64 @@ if($result) {
             $row = mysqli_fetch_row($result);
             echo "<tr>";
             for ($j = 0 ; $j < 3 ; ++$j) echo "<td>$row[$j]</td>";
-            echo "<td><a href='editview.php?id=".$row['0']."'> редактировать описание</a></td></tr>";
+            echo "<td><a href='editview.php?id=".$row['0']."'> редактировать</a></td>
+            <td><a href='deleteview.php?id=".$row['0']."'> удалить</a></td></tr>";
         }
     }
     ?>
-</table><br><br>
+</table>
+    <a href='addview.php'> Добавить вид</a>
+</div><br>
 
-Цены на вид доставки:
+<a href="#weight">Вес:</a>
+<div id="weight">
+    <table>
+        <?php $sq="SELECT * FROM weight ";
+        $result=mysqli_query($connection,$sq);
+        if($result) {
+            $rows = mysqli_num_rows($result);
+            echo "<tr><th>id</th><th>min</th><th>max</th></tr>";
+            for ($i = 0 ; $i < $rows ; ++$i)
+            {
+                $row = mysqli_fetch_row($result);
+                echo "<tr>";
+                for ($j = 0 ; $j < 3 ; ++$j) echo "<td>$row[$j]</td>";
+                echo "<td><a href='editweight.php?id=".$row['0']."'> редактировать </a></td>
+                <td><a href='deleteweight.php?id=".$row['0']."'> удалить</a></td></tr>";
+            }
+        }
+        ?>
+    </table>
+    <a href='addweight.php'> Добавить вес</a>
+</div><br>
+
+<a href="#price">Цены на вид доставки:</a>
+<div id="price">
 <table>
-    <?php $sq="SELECT p.id, v.name, p.weight_min , p.weight_max, p.cost 
+    <?php $sq="SELECT p.id, v.name, w.min, w.max, p.cost 
 FROM price_of_view p 
-inner join view_of_delivery v on p.id_view=v.id";
+inner join view_of_delivery v on p.id_view=v.id
+inner join weight w on p.weight_id=w.id";
     $result=mysqli_query($connection,$sq);
     if($result) {
         $rows = mysqli_num_rows($result);
-        echo "<tr><th>id</th><th>Название вида</th><th>Минимальный вес</th><th>Максимальный вес</th><th>Цена</th></tr>";
+        echo "<tr><th>id</th><th>Название вида</th><th>min вес</th><th>max вес</th><th>Цена</th></tr>";
         for ($i = 0 ; $i < $rows ; ++$i)
         {
             $row = mysqli_fetch_row($result);
             echo "<tr>";
             for ($j = 0 ; $j < 5 ; ++$j) echo "<td>$row[$j]</td>";
-            echo "<td><a href='editprice.php?id=".$row['0']."'>изменить цену</a></td></tr>";
+            echo "<td><a href='editprice.php?id=".$row['0']."'>редактировть</a></td>
+            <td><a href='deleteprice.php?id=".$row['0']."'> удалить</a></td></tr>";
         }
     }
     ?>
-</table><br><br>
+</table>
+    <a href='addprice.php'> Добавить цену</a>
+</div><br>
 
-Заказы:
+<a href="#del">Заказы:</a>
+<div id="del">
 <table>
     <?php $sq="SELECT d.id, d.id_client, d.address1, d.address2, d.date, d.distance, d.weight, t.name, v.name, p.id, d.cost
 FROM delivery d
@@ -131,7 +177,8 @@ inner join price_of_view p on d.id_type=p.id";
     }
     ?>
 </table>
-<a href='adddel.php'> Добавить клиента</a><br><br><br>
-<a class="exit" href='exit.php'>Выйти с админпанели</a>
+<a href='adddel.php'> Добавить заказ</a>
+</div>
+</div>
 </body>
 </html>

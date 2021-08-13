@@ -1,20 +1,31 @@
 <?php
 session_start();
 require ('connect.php');
-$sq="SELECT p.id, v.name, p.weight_min , p.weight_max, p.cost 
-FROM price_of_view p 
-inner join view_of_delivery v on p.id_view=v.id
-WHERE p.id=".$_GET['id']." ";
+$sq="SELECT * FROM price_of_view WHERE id=".$_GET['id']." ";
 $result=mysqli_query($connection,$sq);
 if($result) {
     while ($row = mysqli_fetch_row($result)) {
         $id=$row['0'];
-        $name=$row['1'];
-        $weight_min=$row['2'];
-        $weight_max=$row['3'];
-        $cost=$row['4'];
+        $view=$row['1'];
+        $weight=$row['2'];
+        $cost=$row['3'];
     }
     mysqli_free_result($result);
+}
+if (isset($_POST['button'])){
+    if (isset($_POST['view']) && isset($_POST['weight']) && isset($_POST['cost'])){
+        $view=$_POST['view'];
+        $weight=$_POST['weight'];
+        $cost=$_POST['cost'];
+        $sq="UPDATE price_of_view SET id_view='$view', weight_id='$weight', cost='$cost' WHERE id='$id' ";
+        $result=mysqli_query($connection,$sq);
+        if (mysqli_affected_rows($connection)>0){
+            $err="Успешно сохраненно<br>";
+        }
+        else{
+            $err="Ошибка<br>";
+        }
+    }
 }
 ?>
 <!doctype html>
@@ -24,37 +35,65 @@ if($result) {
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Редактирование</title>
+    <link rel="stylesheet" type="text/css" href="/style/vhod.css">
 </head>
 <body>
-<form method="post">
-    Номер<br>
-    <input name="id" value="<?echo $id;?> " disabled><br>
-    Название<br>
-    <input name="name" value="<?echo $name;?>" disabled><br>
-    Минимальный вес<br>
-    <input name="weight_min" value="<?echo $weight_min;?>" disabled><br><br>
-    Максимальный вес<br>
-    <input name="weight_max" value="<?echo $weight_max;?>" disabled><br><br>
-    Цена<br>
-    <input name="cost" value="<?echo $cost;?>"><br><br>
-    <input type="submit" value="Сохранить" name="button"><br>
+<header>
+    <img src="\images\logovhod.jpg">
+    <a class="exit" href="amain.php">Назад</a>
+</header>
+<form class="block" method="post">
+    <label class="leb">Вид доставки</label>
+    <select name='view'>
+        <?php
+        $query = "SELECT id,name FROM view_of_delivery where id='$view'";
+        $result = mysqli_query($connection,$query);
+        if (mysqli_num_rows($result)> 0) {
+            while($row = mysqli_fetch_array($result)) {
+                echo "<option value=".$row["id"].">".$row["name"]."</option>";
+            }
+        }
+
+        $query = "SELECT id,name FROM view_of_delivery where id!='$view'";
+        $result = mysqli_query($connection,$query);
+        if (mysqli_num_rows($result)> 0) {
+            while($row = mysqli_fetch_array($result)) {
+                echo "<option value=".$row["id"].">".$row["name"]."</option>";
+            }
+        }
+        ?>
+    </select><br>
+    <label class="leb">Вес</label>
+    <select name='weight'>
+        <?php
+        $query = "SELECT id,min,max FROM weight where id='$weight'";
+        $result = mysqli_query($connection,$query);
+        if (mysqli_num_rows($result)> 0) {
+            while($row = mysqli_fetch_array($result)) {
+                echo "<option value=".$row["id"].">".$row["min"]."-".$row["max"]."</option>";
+            }
+        }
+
+        $query = "SELECT id,min,max FROM weight where id!='$weight'";
+        $result = mysqli_query($connection,$query);
+        if (mysqli_num_rows($result)> 0) {
+            while($row = mysqli_fetch_array($result)) {
+                echo "<option value=".$row["id"].">".$row["min"]."-".$row["max"]."</option>";
+            }
+        }
+        ?>
+    </select>
+    <div class="group">
+        <input type="text" name="cost" value="<?echo $cost;?>"> <span class="bar"></span>
+        <label>Стоимость</label>
+    </div>
+    <button name="button" type="submit">Сохранить</button>
+    <?php if(isset($err)) { ?><div role="alert" style="color: rgb(201, 35, 35);
+    position: relative;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%);font-size: 25px;"><?php echo $err;?> </div> <?php } ?>
 </form>
-<a href='amain.php'> назад</a>
-<?php
-if (isset($_POST['button'])){
-    if (isset($_POST['cost'])){
-        $cost=$_POST['cost'];
-        $sq="UPDATE price_of_view SET cost='$cost' WHERE id='$id' ";
-        $result=mysqli_query($connection,$sq);
-        if (mysqli_affected_rows($connection)>0){
-            echo "Успешно сохраненно<br>";
-        }
-        else{
-            echo "Ошибка<br>";
-        }
-    }
-}
-?>
 </body>
 </html>

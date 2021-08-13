@@ -1,32 +1,28 @@
 <?php
 session_start();
 require ('connect.php');
-$sq="SELECT * FROM department WHERE id=".$_GET['id']." ";
+$sq="SELECT * FROM weight WHERE id=".$_GET['id']." ";
 $result=mysqli_query($connection,$sq);
 if($result) {
     while ($row = mysqli_fetch_row($result)) {
         $id=$row['0'];
-        $city=$row['1'];
-        $address=$row['2'];
+        $min=$row['1'];
+        $max=$row['2'];
     }
     mysqli_free_result($result);
 }
-
-if (isset($_POST['button'])) {
-    if (isset($_POST['city']) && isset($_POST['address'])) {
-        $city = $_POST['city'];
-        $address = $_POST['address'];
-        $sq = "UPDATE department SET city='$city', address='$address' WHERE id='$id'";
-        $result = mysqli_query($connection, $sq);
-        if (mysqli_affected_rows($connection)>0){
-            $err= "Успешно сохраненно";
-        }
-        else{
-            $err="Ошибка";
-        }
+if (isset($_POST['min']) && isset($_POST['max'])){
+    $min=$_POST['min'];
+    $max=$_POST['max'];
+    $sq="UPDATE weight SET min='$min', max='$max' WHERE id='$id'";
+    $result=mysqli_query($connection,$sq);
+    if (mysqli_affected_rows($connection)>0){
+        $err="Успешно сохраненно<br>";
+    }
+    else{
+        $err="Ошибка<br>";
     }
 }
-
 ?>
 <!doctype html>
 <html lang="en">
@@ -45,19 +41,20 @@ if (isset($_POST['button'])) {
 </header>
 <form class="block" method="post">
     <div class="group">
-        <input type="text" name="city" value="<?echo $city;?>"> <span class="bar"></span>
-        <label>Город</label>
+        <input type="text" name="min" value="<?echo $min;?>"required> <span class="bar"></span>
+        <label>Min</label>
     </div>
     <div class="group">
-        <input type="text" name="address" value="<?echo $address;?>"> <span class="bar"></span>
-        <label>Адрес</label>
+        <input type="text" name="max" value="<?echo $max;?>"required> <span class="bar"></span>
+        <label>Max</label>
     </div>
     <button name="button" type="submit">Сохранить</button>
     <?php if(isset($err)) { ?><div role="alert" style="color: rgb(201, 35, 35);
     position: relative;
     left: 50%;
     margin-right: -50%;
-    transform: translate(-50%);font-size: 25px;"><?php echo $err;?> </div> <?php } ?>
+    transform: translate(-50%);
+    font-size: 25px;"><?php echo $err;?> </div> <?php } ?>
 </form>
 </body>
 </html>

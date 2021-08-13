@@ -1,0 +1,93 @@
+header{
+    height: 8%;
+    width: 99%;
+}
+
+img{
+    position: absolute;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%);
+}
+
+.qwe{
+    width: 99%;
+    background-color: rgb(235, 236, 240);
+    position: absolute;
+    top: 8%;
+    box-shadow: 0 0 5px;
+}
+
+table {
+    width: 70%;
+    margin-bottom: 20px;
+    border: 1px solid #dddddd;
+    border-collapse: collapse;
+    font-family: "MS Reference Sans Serif";
+}
+
+th {
+    font-weight: bold;
+    padding: 5px;
+    background: #efefef;
+    border: 3px solid #dddddd;
+}
+td {
+    border: 1px solid #dddddd;
+    padding: 5px;
+}
+#client{display: none;}
+#client:target {display: block;}
+
+#dep{display: none;}
+#dep:target {display: block;}
+
+#type{display: none;}
+#type:target {display: block;}
+
+#view{display: none;}
+#view:target {display: block;}
+
+#price{display: none;}
+#price:target {display: block;}
+
+#del{display: none;}
+#del:target {display: block;}
+
+#weight{display: none;}
+#weight:target {display: block;}
+
+a {
+    font-family: "Myriad Pro";
+    color: rgb(98, 93, 93);
+    padding: .2em 2em;
+    display: inline-block;
+    font-size: 20px;
+}
+
+a:active {
+    color: black;
+}
+
+.exit {
+    border: 0.792px solid rgb(201, 35, 35);
+    border-radius: 5px;
+    background-color: rgb(255, 255, 255);
+    font-family: "Myriad Pro";
+    color: rgb(201, 35, 35);
+    padding: .2em 2em;
+    display: inline-block;
+    text-decoration: none;
+    position: absolute;
+    right: 19%;
+    top: 2%;
+}
+
+.exit:hover {
+    background-color: rgb(235, 236, 240);
+}
+
+.exit:active {
+    background-color: rgb(201, 35, 35);
+    color: rgb(255, 255, 255);
+}

@@ -8,7 +8,7 @@ require ('connect.php');
 
 <head>
     <meta charset="UTF-8">
-    <title>Delivery services</title>
+    <title>Delivery service</title>
     <link rel="stylesheet" type="text/css" href="style\main.css"> </head>
     <script type="text/javascript" src="scrol.js"></script>
 <body>
@@ -63,7 +63,7 @@ require ('connect.php');
             }
             ?>
         </div>
-        <div class="sd"><span class="tipp">скдал-двери</span>
+        <div class="sd"><span class="tipp">склад-двери</span>
             <?php $sq="SELECT cost FROM type_of_delivery WHERE id='2'";
             $result=mysqli_query($connection,$sq);
             if($result) {
@@ -99,67 +99,34 @@ require ('connect.php');
     </form>
     <span2>Виды доставки</span2>
     <?php
-    $query ="SELECT v.name, p.cost 
+    $query ="SELECT v.description, v.name, w.min , w.max ,p.cost
 FROM price_of_view p 
 inner join view_of_delivery v on p.id_view=v.id
-where p.weight_max=20
-";
+inner join weight w on p.weight_id=w.id";
 
     $result = mysqli_query($connection, $query);
     if($result)
     {
     $rows = mysqli_num_rows($result);
-
-    echo "<table><tr><th>Тарифы</th><th>0 - 20 кг</th></tr>";
-        for ($i = 0 ; $i < 4 ; ++$i) {
+    $cell = mysqli_num_fields($result);
+    echo "<table><tr><th>Тарифы</th><th>минимальный вес(кг)</th><th>максимальный вес(кг)</th><th>цена(грн/км)</th></tr>";
+        for ($i = 0 ; $i <$rows ; ++$i) {
             $row = mysqli_fetch_row($result);
             echo "<tr>";
-            for ($j = 0 ; $j < 2 ; ++$j){
-                echo "<td>$row[$j]</td>";
+            for ($j = 0 ; $j < $cell ; ++$j){
+                if ($j==0){
+                    $des=$row[$j];
+                }elseif ($j==1) {
+                    echo "<td title='$des'>$row[$j]</td>";
+                }else{
+                    echo "<td>$row[$j]</td>";
+                }
             }
-
-            echo "</tr>";
-        }
-        mysqli_free_result($result);
-        $query ="SELECT v.name, p.cost 
-FROM price_of_view p 
-inner join view_of_delivery v on p.id_view=v.id
-where p.weight_max=200";
-        $result = mysqli_query($connection, $query);
-        $rows = mysqli_num_rows($result);
-        echo "<tr><th>Тарифы</th><th>20 - 200 кг</th></tr>";
-        for ($i = 0 ; $i < 4 ; ++$i) {
-            $row = mysqli_fetch_row($result);
-            echo "<tr>";
-            for ($j = 0 ; $j < 2 ; ++$j){
-                echo "<td>$row[$j]</td>";
-            }
-
-            echo "</tr>";
-        }
-
-        mysqli_free_result($result);
-        $query ="SELECT v.name, p.cost 
-FROM price_of_view p 
-inner join view_of_delivery v on p.id_view=v.id
-where p.weight_max=1000";
-        $result = mysqli_query($connection, $query);
-        $rows = mysqli_num_rows($result);
-        echo "<tr><th>Тарифы</th><th>200 - 1000 кг</th></tr>";
-        for ($i = 0 ; $i < 4 ; ++$i) {
-            $row = mysqli_fetch_row($result);
-            echo "<tr>";
-            for ($j = 0 ; $j < 2 ; ++$j){
-                echo "<td>$row[$j]</td>";
-            }
-
             echo "</tr>";
         }
         echo "</table>";
     }
-
     ?>
-
     <footer>
         <span3>©2021”Delivery service”</span3>
         <span4>Все права защищены.</span4>
@@ -167,5 +134,4 @@ where p.weight_max=1000";
             <br>+38 (XXX) XXX XX XX</span5>
     </footer>
 </body>
-
 </html>

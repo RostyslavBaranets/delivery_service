@@ -21,7 +21,7 @@ img {
     margin-right: -50%;
     transform: translate(-50%);
     width: 20%;
-    height: 50%;
+    padding: 15px 0;
 }
 
 .block div {
@@ -106,7 +106,7 @@ button {
     border-radius: 5px;
     background-color: rgb(201, 35, 35);
     box-shadow: 0px 0px 11.31px 1.69px rgba(0, 0, 0, 0.22);
-    position: absolute;
+    position: relative;
     color: rgb(255, 255, 255);
     font-size: 25px;
     padding: 5px 35px;
@@ -132,12 +132,28 @@ button:focus {
     left: 50%;
     margin-right: -50%;
     transform: translate(-50%);
-    top: 84%;
     font-size: 20px;
 }
 
 .create:hover {
     text-decoration: none;
+}
+
+select{
+    font-size: 18px;
+    position: relative;
+    margin: 25px;
+    color: rgb(98, 93, 93);
+    width: 320px;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.leb{
+    color: #999;
+    font-size: 18px;
+    position: relative;
+    left: 35px;
 }
 
 footer {
@@ -170,4 +186,27 @@ footer span5 {
     top: 15%;
     left: 66%;
     font-size: 20px;
+}
+
+.exit {
+    border: 0.792px solid rgb(201, 35, 35);
+    border-radius: 5px;
+    background-color: rgb(255, 255, 255);
+    font-family: "Myriad Pro";
+    color: rgb(201, 35, 35);
+    padding: .2em 2em;
+    display: inline-block;
+    text-decoration: none;
+    position: absolute;
+    right: 19%;
+    top: 2%;
+}
+
+.exit:hover {
+    background-color: rgb(235, 236, 240);
+}
+
+.exit:active {
+    background-color: rgb(201, 35, 35);
+    color: rgb(255, 255, 255);
 }

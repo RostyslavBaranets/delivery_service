@@ -68,7 +68,10 @@ if (isset($_POST['button'])) {
 
         $view = $_POST['view'];
 
-        $sq = "SELECT id,cost FROM price_of_view WHERE weight_min<" . $_POST['weight'] . " and weight_max>" . $_POST['weight'] . " and id_view=" . $_POST['view'] . " ";
+        $sq = "SELECT p.id,p.cost 
+FROM price_of_view p 
+inner join weight w on p.weight_id=w.id
+WHERE w.min<" . $_POST['weight'] . " and w.max>" . $_POST['weight'] . " and id_view=" . $_POST['view'] . " ";
         $result = mysqli_query($connection, $sq);
         if ($result) {
             while ($row = mysqli_fetch_row($result)) {
@@ -78,7 +81,7 @@ if (isset($_POST['button'])) {
             mysqli_free_result($result);
         }
 
-        $cost = $pricec * $_POST['distance'] + $typec;
+        $cost = $pricec * $distance + $typec;
 
         $sq = "INSERT INTO delivery ( id_client, address1, address2, date, distance, weight, id_type, id_view, id_price, cost) VALUE ('$client','$adr1','$adr2','$date','$distance','$weight','$type','$view','$price','$cost')";
         mysqli_query($connection, $sq);
@@ -93,17 +96,17 @@ if (isset($_POST['button'])) {
 
 <head>
     <meta charset="UTF-8">
-    <title>Регистрация</title>
+    <title>Заказ</title>
     <link rel="stylesheet" type="text/css" href="style\createp.css"> </head>
     <script type="text/javascript" src="script\enebl.js"></script>
 <body>
     <header>
-        <a href="main.php"><img src="images\logovhod.jpg"></a>
+        <a href="index.php"><img src="images\logovhod.jpg"></a>
         <?php
         if (isset($_SESSION['id'])){
             echo "<a class='a' href=\"acount.php\">Личный кабинет</a>";
         }else{
-            echo "<a class='a' href=\"vhod.php\">Войти</a>";
+            echo "<a class='a' href=\"index.php\">Войти</a>";
         }
         ?>
     </header>
@@ -134,7 +137,6 @@ if (isset($_POST['button'])) {
             ?>
             </select>
         </div>
-
         <div class="dc">
             <div class="mesto">Место получения</div>
             <label class="rad">
@@ -188,5 +190,4 @@ if (isset($_POST['button'])) {
             <br>+38 (XXX) XXX XX XX</span5>
     </footer>
 </body>
-
 </html>
